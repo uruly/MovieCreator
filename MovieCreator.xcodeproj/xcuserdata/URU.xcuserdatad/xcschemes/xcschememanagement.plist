@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>MovieCreator.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>6667F06C1F5CDAA0001A07C4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6667F0801F5CDAA0001A07C4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6667F08B1F5CDAA1001A07C4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
