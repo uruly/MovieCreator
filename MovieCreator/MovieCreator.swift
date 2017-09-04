@@ -22,7 +22,7 @@ class MovieCreator {
     var time:Int = 60    // (time / fps)   VCからいじる
     
     var videoWriter:AVAssetWriter?
-    var writerInput:AVAssetWriterInput!
+    var writerInput:AVAssetWriterInput?
     var adaptor:AVAssetWriterInputPixelBufferAdaptor!
     
     //適当に画像サイズ
@@ -51,11 +51,11 @@ class MovieCreator {
             AVVideoHeightKey: height
             ] as [String : Any]
         writerInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: outputSettings as [String : AnyObject])
-        videoWriter!.add(writerInput)
+        videoWriter!.add(writerInput!)
         
         // AVAssetWriterInputPixelBufferAdaptor
         adaptor = AVAssetWriterInputPixelBufferAdaptor(
-            assetWriterInput: writerInput,
+            assetWriterInput: writerInput!,
             sourcePixelBufferAttributes: [
                 kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32ARGB),
                 kCVPixelBufferWidthKey as String: width,
@@ -63,7 +63,7 @@ class MovieCreator {
                 ]
         )
         
-        writerInput.expectsMediaDataInRealTime = true
+        writerInput?.expectsMediaDataInRealTime = true
         
         // 動画の生成開始
         
@@ -147,12 +147,13 @@ class MovieCreator {
     func finished(_ completion:@escaping (URL)->()){
         // 動画生成終了
         if writerInput != nil{
-            writerInput.markAsFinished()
+            writerInput!.markAsFinished()
             if videoWriter != nil {
                 videoWriter!.endSession(atSourceTime: CMTimeMake(Int64((__int32_t(frameCount)) *  __int32_t(time)), fps))
                 videoWriter!.finishWriting(completionHandler: {
                     // Finish!
                     print("movie created.")
+                    self.writerInput = nil
                     if self.url != nil {
                         completion(self.url!)
                     }
