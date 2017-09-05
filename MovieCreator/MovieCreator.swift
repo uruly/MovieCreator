@@ -143,23 +143,23 @@ class MovieCreator {
         frameCount += 1
     }
     
+    
     //終わったら後始末をしてURLを返す
     func finished(_ completion:@escaping (URL)->()){
         // 動画生成終了
-        if writerInput != nil{
-            writerInput!.markAsFinished()
-            if videoWriter != nil {
-                videoWriter!.endSession(atSourceTime: CMTimeMake(Int64((__int32_t(frameCount)) *  __int32_t(time)), fps))
-                videoWriter!.finishWriting(completionHandler: {
-                    // Finish!
-                    print("movie created.")
-                    self.writerInput = nil
-                    if self.url != nil {
-                        completion(self.url!)
-                    }
-                })
-            }
+        if writerInput == nil || videoWriter == nil{
+            return
         }
+        writerInput!.markAsFinished()
+        videoWriter!.endSession(atSourceTime: CMTimeMake(Int64((__int32_t(frameCount)) *  __int32_t(time)), fps))
+        videoWriter!.finishWriting(completionHandler: {
+            // Finish!
+            print("movie created.")
+            self.writerInput = nil
+            if self.url != nil {
+                completion(self.url!)
+            }
+        })
     }
     
     //ピクセルバッファへの変換
