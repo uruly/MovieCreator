@@ -35,7 +35,7 @@ class MovieCreator {
         //保存先のURL
         url = NSURL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("\(NSUUID().uuidString).mp4")
         // AVAssetWriter
-        guard let firstVideoWriter = try? AVAssetWriter(outputURL: url!, fileType: AVFileTypeQuickTimeMovie) else {
+        guard let firstVideoWriter = try? AVAssetWriter(outputURL: url!, fileType: AVFileType.mov) else {
             fatalError("AVAssetWriter error")
         }
         videoWriter = firstVideoWriter
@@ -50,7 +50,7 @@ class MovieCreator {
             AVVideoWidthKey: width,
             AVVideoHeightKey: height
             ] as [String : Any]
-        writerInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: outputSettings as [String : AnyObject])
+        writerInput = AVAssetWriterInput(mediaType: AVMediaType.video, outputSettings: outputSettings as [String : AnyObject])
         videoWriter!.add(writerInput!)
         
         // AVAssetWriterInputPixelBufferAdaptor

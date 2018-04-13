@@ -98,7 +98,7 @@ class ViewController: UIViewController {
     
     
     //ボタンを押した時の処理 ボタンの画像を押すたびに動画に継ぎ足し
-    func btnTapped(sender:UIButton){
+    @objc func btnTapped(sender:UIButton){
         //ボタンの画像があるかをチェック
         if let image = sender.imageView?.image{
             //１枚目の画像だけセットアップを含む
@@ -115,7 +115,7 @@ class ViewController: UIViewController {
     }
     
     //動画を生成する
-    func createBtnTapped(){
+    @objc func createBtnTapped(){
         //動画生成終了を呼び出してURLを得る -> Playerにのせる
         movieCreator.finished { (url) in
             DispatchQueue.main.async{
@@ -128,7 +128,7 @@ class ViewController: UIViewController {
     }
     
     //スライダーの値が変わったとき
-    func sliderValueChanged(sender:UISlider){
+    @objc func sliderValueChanged(sender:UISlider){
         movieCreator.time = Int(sender.value)
         timeLabel.text = "１枚の表示時間\(Int(sender.value)) / 60秒"
     }
